@@ -1,6 +1,6 @@
-package com.assignment.DecomoDigitial.common;
+package com.assignment.decomodigitial.common;
 
-import com.assignment.DecomoDigitial.enums.ResponseCodes;
+import com.assignment.decomodigitial.enums.ResponseCodes;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.micrometer.core.instrument.util.StringUtils;

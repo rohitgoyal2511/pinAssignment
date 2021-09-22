@@ -1,4 +1,4 @@
-package com.assignment.DecomoDigitial.entity;
+package com.assignment.decomodigitial.entity;
 
 import lombok.Data;
 

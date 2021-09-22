@@ -1,14 +1,14 @@
-package com.assignment.DecomoDigitial.service.impl;
+package com.assignment.decomodigitial.service.impl;
 
-import com.assignment.DecomoDigitial.common.Constant;
-import com.assignment.DecomoDigitial.dto.pin.request.SendPinDTO;
-import com.assignment.DecomoDigitial.dto.pin.request.VerifyPinDTO;
-import com.assignment.DecomoDigitial.dto.pin.response.SendPinResponse;
-import com.assignment.DecomoDigitial.dto.pin.response.VerifyPinResponse;
-import com.assignment.DecomoDigitial.entity.PIN;
-import com.assignment.DecomoDigitial.exception.ApplicationException;
-import com.assignment.DecomoDigitial.repository.PinRepo;
-import com.assignment.DecomoDigitial.service.PinService;
+import com.assignment.decomodigitial.common.Constant;
+import com.assignment.decomodigitial.dto.pin.request.SendPinDTO;
+import com.assignment.decomodigitial.dto.pin.request.VerifyPinDTO;
+import com.assignment.decomodigitial.dto.pin.response.SendPinResponse;
+import com.assignment.decomodigitial.dto.pin.response.VerifyPinResponse;
+import com.assignment.decomodigitial.entity.PIN;
+import com.assignment.decomodigitial.exception.ApplicationException;
+import com.assignment.decomodigitial.repository.PinRepo;
+import com.assignment.decomodigitial.service.PinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.assignment</groupId>
-	<artifactId>DecomoDigitial</artifactId>
+	<artifactId>decomodigitial</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>DecomoDigitial</name>
+	<name>decomodigitial</name>
 	<description>Decomo Digital Assignment</description>
 	<properties>
 		<java.version>1.8</java.version>

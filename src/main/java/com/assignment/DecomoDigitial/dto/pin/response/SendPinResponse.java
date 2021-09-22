@@ -1,4 +1,4 @@
-package com.assignment.DecomoDigitial.dto.pin.response;
+package com.assignment.decomodigitial.dto.pin.response;
 
 import lombok.Data;
 

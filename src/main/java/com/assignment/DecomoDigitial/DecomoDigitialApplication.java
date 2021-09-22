@@ -1,4 +1,4 @@
-package com.assignment.DecomoDigitial;
+package com.assignment.decomodigitial;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

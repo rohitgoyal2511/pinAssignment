@@ -1,7 +1,7 @@
-package com.assignment.DecomoDigitial.exception;
+package com.assignment.decomodigitial.exception;
 
-import com.assignment.DecomoDigitial.common.ApiResponse;
-import com.assignment.DecomoDigitial.enums.ResponseCodes;
+import com.assignment.decomodigitial.common.ApiResponse;
+import com.assignment.decomodigitial.enums.ResponseCodes;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

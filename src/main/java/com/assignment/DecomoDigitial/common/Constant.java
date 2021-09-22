@@ -1,4 +1,4 @@
-package com.assignment.DecomoDigitial.common;
+package com.assignment.decomodigitial.common;
 
 public class Constant {
 

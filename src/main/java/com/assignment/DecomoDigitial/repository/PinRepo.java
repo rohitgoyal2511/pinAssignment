@@ -1,6 +1,6 @@
-package com.assignment.DecomoDigitial.repository;
+package com.assignment.decomodigitial.repository;
 
-import com.assignment.DecomoDigitial.entity.PIN;
+import com.assignment.decomodigitial.entity.PIN;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,9 @@
-package com.assignment.DecomoDigitial.service;
+package com.assignment.decomodigitial.service;
 
-import com.assignment.DecomoDigitial.dto.pin.request.SendPinDTO;
-import com.assignment.DecomoDigitial.dto.pin.request.VerifyPinDTO;
-import com.assignment.DecomoDigitial.dto.pin.response.SendPinResponse;
-import com.assignment.DecomoDigitial.dto.pin.response.VerifyPinResponse;
+import com.assignment.decomodigitial.dto.pin.request.SendPinDTO;
+import com.assignment.decomodigitial.dto.pin.request.VerifyPinDTO;
+import com.assignment.decomodigitial.dto.pin.response.SendPinResponse;
+import com.assignment.decomodigitial.dto.pin.response.VerifyPinResponse;
 
 import javax.validation.Valid;
 

@@ -1,4 +1,4 @@
-package com.assignment.DecomoDigitial.enums;
+package com.assignment.decomodigitial.enums;
 
 import org.springframework.http.HttpStatus;
 

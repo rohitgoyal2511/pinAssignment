@@ -1,6 +1,6 @@
-package com.assignment.DecomoDigitial.dto.pin.request;
+package com.assignment.decomodigitial.dto.pin.request;
 
-import com.assignment.DecomoDigitial.common.Constant;
+import com.assignment.decomodigitial.common.Constant;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -15,6 +15,8 @@ public class VerifyPinDTO {
     @Pattern(regexp = "^(0|[1-9][0-9]*)$", message = "Please enter numeric values only")
     private String pin;
     @NotBlank(message = "msisdn is missing")
+    @Pattern(regexp = "^(0|[1-9][0-9]*)$", message = "Please enter numeric values only")
+    @Size(min = 10, max = 12, message = "Msisdn should be 10 to 12 digit long")
     private String msisdn;
     @NotBlank(message = "pinId is missing")
     private String pinId;

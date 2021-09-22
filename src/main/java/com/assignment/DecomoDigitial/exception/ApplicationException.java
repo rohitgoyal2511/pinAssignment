@@ -1,4 +1,4 @@
-package com.assignment.DecomoDigitial.exception;
+package com.assignment.decomodigitial.exception;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
