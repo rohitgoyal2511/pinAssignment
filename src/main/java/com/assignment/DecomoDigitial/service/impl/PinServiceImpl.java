@@ -1,6 +1,7 @@
 package com.assignment.decomodigitial.service.impl;
 
 import com.assignment.decomodigitial.common.Constant;
+import com.assignment.decomodigitial.common.MessageConstant;
 import com.assignment.decomodigitial.dto.pin.request.SendPinDTO;
 import com.assignment.decomodigitial.dto.pin.request.VerifyPinDTO;
 import com.assignment.decomodigitial.dto.pin.response.SendPinResponse;
@@ -10,6 +11,7 @@ import com.assignment.decomodigitial.exception.ApplicationException;
 import com.assignment.decomodigitial.repository.PinRepo;
 import com.assignment.decomodigitial.service.PinService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -31,7 +33,7 @@ public class PinServiceImpl implements PinService {
 
         if (Optional.ofNullable(sendPinDTO.getMsisdn()).isPresent()) {
             if (!checkEligibility(sendPinDTO.getMsisdn())) {
-                throw new ApplicationException(Constant.GENERATE_PIN_EXHAUSTED_MESSAGE);
+                throw new ApplicationException(MessageConstant.GENERATE_PIN_EXHAUSTED_MESSAGE);
             }
         }
 
@@ -46,28 +48,46 @@ public class PinServiceImpl implements PinService {
         VerifyPinResponse response = new VerifyPinResponse();
         boolean valid = false;
 
-        PIN pin = pinRepo.findByPinIdAndVerified(verifyPinDTO.getPinId(), false)
-                .orElseThrow(() -> new ApplicationException("This pinId is not active any more"));
+        PIN pin = pinRepo.findById(verifyPinDTO.getPinId())
+                .orElseThrow(() -> new ApplicationException(MessageConstant.INVALID_PIN_ID));
 
-            long sentAt = pin.getSentAt();
-            long currentTime = Instant.now().toEpochMilli();
-            pin.setModifiedAt(currentTime);
-            if (((sentAt + Long.parseLong(Constant.PIN_EXPIRATION)) - currentTime) > 0 && verifyPinDTO.getPin().equals(pin.getPin())) {
-                pin.setVerified(true);
-                pinRepo.save(pin);
-                valid = true;
+        if (Optional.ofNullable(pin).isPresent() && pin.isVerified()) {
+            throw new ApplicationException(MessageConstant.PIN_ID_NOT_ACTIVE);
+        }
+
+        long sentAt = pin.getSentAt();
+        long currentTime = Instant.now().toEpochMilli();
+        pin.setModifiedAt(currentTime);
+        if (((sentAt + Constant.PIN_EXPIRATION) - currentTime) > 0 && verifyPinDTO.getPin().equals(pin.getPin())) {
+            pin.setVerified(true);
+            pinRepo.save(pin);
+            valid = true;
+        } else {
+            if (pin.getValidationTry() == Constant.PIN_VALIDATE_LIMIT - 1) {
+                // delete if pin validate limit exceed
+                pinRepo.delete(pin);
             } else {
-                if (pin.getValidationTry() == Constant.PIN_VALIDATE_LIMIT -1) {
-                    // delete if pin validate limit exceed
-                    pinRepo.delete(pin);
-                } else {
-                    pin.setValidationTry(pin.getValidationTry() + 1);
-                    pinRepo.save(pin);
-                }
+                pin.setValidationTry(pin.getValidationTry() + 1);
+                pinRepo.save(pin);
             }
+        }
 
         response.setValid(valid);
         return response;
+    }
+
+    @Scheduled(fixedRate = Constant.SCHEDULER)
+    public void scheduled() {
+
+        Iterable<PIN> pins = pinRepo.findAll();
+        long currentTime = Instant.now().toEpochMilli();
+
+        for (PIN pin : pins) {
+            if (!pin.isVerified() && (pin.getSentAt() + Constant.PIN_EXPIRATION) - currentTime <= 0) {
+                // pin is expired, need to removed this
+                pinRepo.delete(pin);
+            }
+        }
     }
 
     private String generatePin() {
@@ -92,13 +112,10 @@ public class PinServiceImpl implements PinService {
         List<PIN> validPins = new ArrayList<>();
         long currentTime = Instant.now().toEpochMilli();
         if (pins != null && !pins.isEmpty()) {
-            for (PIN pin: pins) {
+            for (PIN pin : pins) {
                 //check if pin has expired
-                if (((pin.getSentAt() + Long.parseLong(Constant.PIN_EXPIRATION)) - currentTime) > 0) {
+                if (((pin.getSentAt() + Constant.PIN_EXPIRATION) - currentTime) > 0) {
                     validPins.add(pin);
-                } else {
-                    // delete if pin exceed Expiration limit
-                    pinRepo.delete(pin);
                 }
             }
         }

@@ -12,5 +12,5 @@ public interface PinRepo extends CrudRepository<PIN, String> {
 
     List<PIN> findByMsisdnAndVerifiedOrderBySentAtDesc(String recipient, boolean verified);
 
-    Optional<PIN> findByPinIdAndVerified(String pinId, boolean verified);
+    Optional<PIN> findByPinIdAndVerified(Long pinId, boolean verified);
 }
