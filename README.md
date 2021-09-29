@@ -1,4 +1,4 @@
-# PIN manager REST service
+# PIN Manager REST service
 
 ## Requirements
 
